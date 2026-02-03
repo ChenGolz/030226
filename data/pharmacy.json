@@ -178,11 +178,9 @@
       "veganNotes": "המותג מצהיר שכל המוצרים טבעוניים (100% רכיבים מהצומח) מאז 2023.",
       "notes": "מותג איפור אירופאי במחירים נגישים.",
       "stores": [
-        "be",
         "shufersal"
       ],
       "storePages": {
-        "be": "https://www.bestore.co.il/online/he/search?q=CATRICE",
         "shufersal": "https://www.shufersal.co.il/online/he/search?q=CATRICE%3Arelevance%3Abrand%3A4413"
       },
       "sources": [
@@ -193,7 +191,7 @@
     {
       "id": "ofra",
       "name": "OFRA",
-      "nameHe": "אופרה (OFRA)",
+      "nameHe": "עופרה (OFRA)",
       "categories": [
         "איפור פנים",
         "איפור עיניים",
@@ -205,11 +203,9 @@
       "veganNotes": "האתר הרשמי מצהיר שהמותג 100% טבעוני; קיימים מקורות צד-ג׳ שמציינים שלא כל המוצרים טבעוניים—מומלץ לבדוק מוצר ספציפי.",
       "notes": "מותג איפור מקצועי; זמין במבחר מוצרים בשופרסל אונליין.",
       "stores": [
-        "shufersal",
-        "be"
+        "shufersal"
       ],
       "storePages": {
-        "be": "https://www.bestore.co.il/online/he/search?q=OFRA",
         "shufersal": "https://www.shufersal.co.il/online/he/search?q=OFRA%3Arelevance%3Abrand%3A4412"
       },
       "sources": [
@@ -234,11 +230,9 @@
       "veganNotes": "המותג מצהיר על מוצרים טבעוניים ו-cruelty-free.",
       "notes": "מותג טיפוח עם דגש על פעילות וספורט; קיים גם אתר ישראלי.",
       "stores": [
-        "be",
         "shufersal"
       ],
       "storePages": {
-        "be": "https://www.bestore.co.il/online/en/search?q=FRE%3Arelevance%3Abrand%3A3523",
         "shufersal": "https://www.shufersal.co.il/online/he/search?q=FRE"
       },
       "website": "https://freskincare.co.il/",
@@ -263,11 +257,9 @@
       "veganNotes": "לפי האתר הרשמי, רוב המוצרים טבעוניים (מעל ~98%), עם חריגים בודדים (למשל מוצר SPF עם דונג דבורים).",
       "notes": "מותג אוסטרלי לשיזוף עצמי וטיפוח גוף.",
       "stores": [
-        "be",
         "shufersal"
       ],
       "storePages": {
-        "be": "https://www.bestore.co.il/online/he/search?q=BALI%20BODY",
         "shufersal": "https://www.shufersal.co.il/online/he/search?q=BALI%20BODY"
       },
       "sources": [
