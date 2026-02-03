@@ -1,5 +1,5 @@
 {
-  "updated": "2026-01-31",
+  "updated": "2026-02-03-brands-v2",
   "stores": [
     {
       "id": "superpharm",
@@ -160,6 +160,156 @@
     {
       "q": "למה יש כאן 'Top 10' כתבנית?",
       "a": "כדי שתוכלי לערוך בקלות: כל הרשימה יושבת בקובץ JSON אחד. אפשר להתחיל עם התבנית ולהחליף לפריטים שאת מאשרת."
+    }
+  ],
+  "brands": [
+    {
+      "id": "catrice",
+      "name": "CATRICE",
+      "nameHe": "קטריס",
+      "categories": [
+        "איפור",
+        "שפתיים",
+        "עיניים",
+        "פנים",
+        "ציפורניים"
+      ],
+      "crueltyFree": true,
+      "vegan": true,
+      "notes": "לפי הצהרת המותג — כל מוצרי CATRICE כיום 100% טבעוניים; בנוסף מופיע כ-cruelty-free ב-PETA.",
+      "storeLinks": {
+        "be": "https://www.bestore.co.il/online/he/search?q=CATRICE",
+        "shufersal": "https://www.shufersal.co.il/online/he/search?q=CATRICE%3Arelevance%3Abrand%3A4413"
+      },
+      "sources": [
+        "https://crueltyfree.peta.org/company/catrice/",
+        "https://www.catrice.eu/en-de/catrice-cares/vegan/animal-welfare",
+        "https://www.shufersal.co.il/online/he/search?q=CATRICE%3Arelevance%3Abrand%3A4413"
+      ],
+      "certifications": [
+        {
+          "org": "PETA Beauty Without Bunnies",
+          "status": "listed",
+          "url": "https://crueltyfree.peta.org/company/catrice/"
+        }
+      ],
+      "storeBrandPageUrl": "https://www.bestore.co.il/online/he/search?q=CATRICE",
+      "tags": [
+        "cruelty-free",
+        "vegan"
+      ]
+    },
+    {
+      "id": "ofra",
+      "name": "OFRA",
+      "nameHe": "אופרה",
+      "categories": [
+        "איפור",
+        "שפתיים",
+        "עיניים",
+        "פנים",
+        "טיפוח עור"
+      ],
+      "crueltyFree": true,
+      "vegan": true,
+      "notes": "המותג מופיע ב-PETA כ-cruelty-free, ובמקורות רשמיים מצהיר על 100% טבעוני. מומלץ עדיין לבדוק סימון Vegan/רכיבים במוצרים ספציפיים.",
+      "storeLinks": {
+        "be": "https://www.bestore.co.il/online/he/search?q=OFRA",
+        "shufersal": "https://www.shufersal.co.il/online/he/search?q=OFRA%3Arelevance%3Abrand%3A4412"
+      },
+      "sources": [
+        "https://crueltyfree.peta.org/company/ofra-cosmetics/",
+        "https://crueltyfree.peta.org/country?alpha=o&region=israel%2F1000",
+        "https://ofracosmetics.com/blogs/press-releases/ofra-launches-all-new-full-face-palette",
+        "https://www.shufersal.co.il/online/he/search?q=OFRA%3Arelevance%3Abrand%3A4412"
+      ],
+      "certifications": [
+        {
+          "org": "PETA Beauty Without Bunnies",
+          "status": "listed",
+          "url": "https://crueltyfree.peta.org/company/ofra-cosmetics/"
+        }
+      ],
+      "storeBrandPageUrl": "https://www.bestore.co.il/online/he/search?q=OFRA",
+      "tags": [
+        "cruelty-free",
+        "vegan"
+      ]
+    },
+    {
+      "id": "fre",
+      "name": "FRÉ",
+      "nameHe": "פרה (FRÉ)",
+      "categories": [
+        "טיפוח עור",
+        "ניקוי פנים",
+        "סרומים",
+        "לחות"
+      ],
+      "crueltyFree": true,
+      "vegan": true,
+      "notes": "FRÉ מצהירה על מוצרים טבעוניים ו-cruelty-free, ומופיעה גם ב-PETA כ-cruelty-free.",
+      "storeLinks": {
+        "be": "https://www.bestore.co.il/online/en/search?q=FRE%3Arelevance%3Abrand%3A3523",
+        "superpharm": "https://shop.super-pharm.co.il/FRE/c/b_7040"
+      },
+      "sources": [
+        "https://crueltyfree.peta.org/company/fre-skincare/",
+        "https://www.freskincare.com/blogs/the-fre-life/we-are-proud-to-announce-that-fre-has-been-endorsed-as-a-peta-cruelty-free-brand",
+        "https://www.bestore.co.il/online/en/search?q=FRE%3Arelevance%3Abrand%3A3523"
+      ],
+      "certifications": [
+        {
+          "org": "PETA Beauty Without Bunnies",
+          "status": "listed",
+          "url": "https://crueltyfree.peta.org/company/fre-skincare/"
+        }
+      ],
+      "storeBrandPageUrl": "https://www.bestore.co.il/online/en/search?q=FRE%3Arelevance%3Abrand%3A3523",
+      "tags": [
+        "cruelty-free",
+        "vegan"
+      ]
+    },
+    {
+      "id": "bali-body",
+      "name": "BALI BODY",
+      "nameHe": "באלי בודי",
+      "categories": [
+        "שיזוף עצמי",
+        "סנקר/SPF",
+        "טיפוח גוף",
+        "טיפוח פנים"
+      ],
+      "crueltyFree": true,
+      "vegan": "mixed",
+      "notes": "מופיע ב-PETA כ-cruelty-free. לגבי טבעונות—יש מקורות שמציגים 'אופציות טבעוניות' ולא בהכרח 100% לכל המוצרים, לכן מומלץ לבדוק מוצר-מוצר.",
+      "storeLinks": {
+        "be": "https://www.bestore.co.il/online/he/search?q=BALI%20BODY",
+        "shufersal_example_product": "https://www.shufersal.co.il/online/he/p/P_9354477002076"
+      },
+      "sources": [
+        "https://crueltyfree.peta.org/company/bali-body/",
+        "https://www.crueltyfreekitty.com/brands/bali-body/",
+        "https://www.crueltyfreeinternational.org/listing/bali-body/"
+      ],
+      "certifications": [
+        {
+          "org": "PETA Beauty Without Bunnies",
+          "status": "listed",
+          "url": "https://crueltyfree.peta.org/company/bali-body/"
+        },
+        {
+          "org": "Cruelty Free International",
+          "status": "listed",
+          "url": "https://www.crueltyfreeinternational.org/listing/bali-body/"
+        }
+      ],
+      "storeBrandPageUrl": "https://www.bestore.co.il/online/he/search?q=BALI%20BODY",
+      "tags": [
+        "cruelty-free",
+        "vegan-options"
+      ]
     }
   ]
 }
