@@ -356,12 +356,11 @@
         "url": "https://www.amazon.com/dp/B0BNNN3FN5?tag=nocrueltyil-20",
         "asin": "B0BNNN3FN5",
         "currency": "USD",
-        "priceUSD": 43.0,
+        "priceUSD": 54,
         "freeShipOver": 49
       }
     ],
     "isKids": false,
-    "isDiscounted": true,
     "image": "assets/img/products/B0BNNN3FN5.jpg"
   },
   {
@@ -421,7 +420,7 @@
         "url": "https://www.amazon.com/dp/B09GX4CVBX?tag=nocrueltyil-20",
         "asin": "B09GX4CVBX",
         "currency": "USD",
-        "priceUSD": 11.89
+        "priceUSD": 16.47
       }
     ],
     "isKids": false,
