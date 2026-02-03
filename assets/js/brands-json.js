@@ -1,4 +1,5 @@
-// // Build: 2026-02-02-v19
+// // Build: 2026-02-03-v24
+function bust(u){ try{ u=String(u); var sep=u.indexOf('?')>=0?'&':'?'; return u+sep+'t='+Date.now(); }catch(e){ return u; } }
 try { window.KBWG_BRANDS_BUILD = '2026-02-02-v19'; console.info('[KBWG] KBWG_BRANDS_BUILD ' + window.KBWG_BRANDS_BUILD); } catch(e) {}
 
 // Resolve URLs correctly when Weglot serves pages under /en/ (or when hosted under a subpath, e.g. GitHub Pages).
@@ -1123,11 +1124,11 @@ function stopLinkPropagation(el) {
     var productsUrl = __kbwgResolveFromSiteBase(productsPath, 'brands-json.js');
 
     Promise.all([
-      fetch(jsonUrl, { cache: 'force-cache' }).then(function (r) {
+      fetch(bust(jsonUrl), { cache: 'no-store' }).then(function (r) {
         if (!r.ok) throw new Error('Failed to load ' + jsonUrl + ' (from ' + jsonPath + ')');
         return r.json();
       }),
-      fetch(productsUrl, { cache: 'force-cache' }).then(function (r) {
+      fetch(bust(productsUrl), { cache: 'no-store' }).then(function (r) {
         if (!r.ok) throw new Error('Failed to load ' + productsUrl + ' (from ' + productsPath + ')');
         return r.json();
       })

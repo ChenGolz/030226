@@ -1,5 +1,39 @@
 // מוצרים page logic (RTL-friendly, data-normalized, performant)
 (function () {
+  function siteBaseFromScript(){
+    try{
+      var src = '';
+      try { src = (document.currentScript && document.currentScript.src) ? String(document.currentScript.src) : ''; } catch(e){ src=''; }
+      if(!src){
+        var scripts = document.getElementsByTagName('script');
+        for (var i = scripts.length - 1; i >= 0; i--) {
+          var ssrc = scripts[i] && scripts[i].src ? String(scripts[i].src) : '';
+          if (ssrc.indexOf('products.js') !== -1) { src = ssrc; break; }
+        }
+      }
+      if(!src) return '/';
+      var u = new URL(src, location.href);
+      var p = u.pathname || '/';
+      var idx = p.indexOf('/assets/js/');
+      var base = idx >= 0 ? p.slice(0, idx) : p.replace(/\/[^\/]+$/, '');
+      base = base.replace(/\/+$/, '');
+      var parts = base.split('/').filter(Boolean);
+      var langs = { en: 1, he: 1, iw: 1, ar: 1, fr: 1, es: 1, de: 1, ru: 1 };
+      if (parts.length && langs[parts[parts.length - 1]]) parts.pop();
+      return '/' + parts.join('/');
+    } catch(e){ return '/'; }
+  }
+  function resolveFromBase(rel){
+    try{
+      if(!rel) return rel;
+      var p = String(rel).replace(/^\.\//,'');
+      if (/^https?:\/\//i.test(p)) return p;
+      var base = siteBaseFromScript() || '/';
+      if (base === '/') return '/' + p.replace(/^\//,'');
+      return base + '/' + p.replace(/^\//,'');
+    } catch(e){ return rel; }
+  }
+
   const qs = (s) => document.querySelector(s);
 
   // Pagination helpers (v12) — keeps pages fast on mobile/iPad
@@ -127,6 +161,7 @@ const onlyIsrael = qs("#onlyIsrael");
   const onlyMen = qs("#onlyMen");
   const onlyKids = qs("#onlyKids");
   const onlyFreeShip = qs("#onlyFreeShip");
+  const onlyDiscounted = qs("#onlyDiscounted");
 
   const chips = Array.from(document.querySelectorAll(".chip"));
   let currentCat = "all";
@@ -1203,6 +1238,13 @@ function normalizeProduct(p) {
         return best != null;
       },
 
+
+      // Only discounted products
+      () => {
+        if (!onlyDiscounted?.checked) return true;
+        return p && p.isDiscounted === true;
+      },
+
       // מחיר range
       () => {
         if (!priceMinInput && !priceMaxInput) return true;
@@ -1349,16 +1391,32 @@ const frag = document.createDocumentFragment();
       media.className = "pMedia";
       if (p.image) {
         const img = document.createElement("img");
-        img.src = p.image;
+        img.src = resolveFromBase(p.image);
         img.alt = p.name || "";
         img.loading = "lazy";
         img.decoding = "async";
         img.width = 640;
         img.height = 640;
         // Avoid broken cards / console noise when an image is missing.
+        img.dataset.kbwgFallbackStep = '0';
         img.onerror = function(){
+          try{
+            var step = parseInt(this.dataset.kbwgFallbackStep || '0', 10) || 0;
+            var src = String(this.src || '');
+            // Try a couple of common extensions before falling back to placeholder
+            if (step === 0 && /\.jpg(\?.*)?$/i.test(src)){
+              this.dataset.kbwgFallbackStep = '1';
+              this.src = src.replace(/\.jpg(\?.*)?$/i, '.jpeg$1');
+              return;
+            }
+            if (step === 1 && /\.(jpe?g)(\?.*)?$/i.test(src)){
+              this.dataset.kbwgFallbackStep = '2';
+              this.src = src.replace(/\.(jpe?g)(\?.*)?$/i, '.png$2');
+              return;
+            }
+          }catch(e){}
           try{ this.onerror = null; }catch(e){}
-          this.src = 'assets/img/products/placeholder.jpg';
+          this.src = resolveFromBase('assets/img/products/placeholder.jpg');
         };
         media.appendChild(img);
       } else {
@@ -1512,7 +1570,7 @@ function bind() {
     if (
       e.target &&
       e.target.matches(
-        "#q, #brandSelect, #storeSelect, #typeSelect, #sort, #onlyLB, #onlyPeta, #onlyIsrael, #onlyFreeShip, #onlyMen, #onlyKids"
+        "#q, #brandSelect, #storeSelect, #typeSelect, #sort, #onlyLB, #onlyPeta, #onlyIsrael, #onlyFreeShip, #onlyDiscounted, #onlyMen, #onlyKids"
       )
     ) {
       scheduleRender();
@@ -1523,7 +1581,7 @@ function bind() {
     if (
       e.target &&
       e.target.matches(
-        "#q, #brandSelect, #storeSelect, #typeSelect, #sort, #onlyLB, #onlyPeta, #onlyIsrael, #onlyFreeShip, #onlyMen, #onlyKids"
+        "#q, #brandSelect, #storeSelect, #typeSelect, #sort, #onlyLB, #onlyPeta, #onlyIsrael, #onlyFreeShip, #onlyDiscounted, #onlyMen, #onlyKids"
       )
     ) {
       scheduleRender();
@@ -1578,6 +1636,7 @@ function bind() {
     onlyPeta.checked = false;
 onlyIsrael.checked = false;
     onlyFreeShip.checked = false;
+    if (onlyDiscounted) onlyDiscounted.checked = false;
     if (priceMinInput) priceMinInput.value = "";
     if (priceMaxInput) priceMaxInput.value = "";
     chips.forEach((c) => c.classList.remove("active"));

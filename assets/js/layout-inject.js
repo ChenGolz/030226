@@ -1,47 +1,39 @@
-// Build: 2026-02-02-v19
+// Build: 2026-02-03-v24
 // Shared layout injector (header + footer) for KBWG static pages
 // Loads partials/header.html into #siteHeaderMount and partials/footer.html into #siteFooterMount
+// IMPORTANT: Do NOT cache partials in sessionStorage; it causes stale menus/scripts after deploy.
 (function () {
-
-const KBWG_LAYOUT_BUILD = '2026-02-02-v19';
-const KBWG_HEADER_KEY = 'kbwg_header_' + KBWG_LAYOUT_BUILD;
-const KBWG_FOOTER_KEY = 'kbwg_footer_' + KBWG_LAYOUT_BUILD;
-
-// Clear older cached versions so header updates immediately
-try {
-  ['KBWG_HEADER_KEY','KBWG_HEADER_KEY','kbwg_header_v3','KBWG_FOOTER_KEY','KBWG_FOOTER_KEY','kbwg_footer_v3'].forEach(k=>sessionStorage.removeItem(k));
-} catch(e) {}
-
+  const KBWG_LAYOUT_BUILD = '2026-02-03-v24';
+  try { console.info('[KBWG] layout build', KBWG_LAYOUT_BUILD); } catch (e) {}
 
   const scriptEl = document.currentScript;
   const base = (scriptEl && scriptEl.dataset && scriptEl.dataset.base) ? scriptEl.dataset.base : '';
-  const HEADER_URL = base + 'partials/header.html?v=' + KBWG_LAYOUT_BUILD;
-  const FOOTER_URL = base + 'partials/footer.html?v=' + KBWG_LAYOUT_BUILD;
 
-  function cacheKey(url){ return 'kbwg:partial:' + url; }
+  const HEADER_URL = base + 'partials/header.html?v=' + encodeURIComponent(KBWG_LAYOUT_BUILD);
+  const FOOTER_URL = base + 'partials/footer.html?v=' + encodeURIComponent(KBWG_LAYOUT_BUILD);
+
+  function bust(url) {
+    try {
+      const u = String(url);
+      const sep = u.indexOf('?') >= 0 ? '&' : '?';
+      return u + sep + 't=' + Date.now();
+    } catch (e) {
+      return url;
+    }
+  }
 
   async function inject(url, mountSelector) {
     const mount = document.querySelector(mountSelector);
     if (!mount) return false;
 
-    // Try session cache first (fast navigation between pages)
     try {
-      const cached = sessionStorage.getItem(cacheKey(url));
-      if (cached) {
-        mount.innerHTML = cached;
-        return true;
-      }
-    } catch (e) {}
-
-    try {
-      const res = await fetch(url, { cache: 'force-cache' });
+      const res = await fetch(bust(url), { cache: 'no-store' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const html = await res.text();
       mount.innerHTML = html;
-      try { sessionStorage.setItem(cacheKey(url), html); } catch (e) {}
       return true;
     } catch (e) {
-      // Fail silently – page still works without injected layout
+      try { console.warn('[KBWG] layout inject failed', mountSelector, e && e.message ? e.message : e); } catch(_){}
       return false;
     }
   }
@@ -49,11 +41,19 @@ try {
   function fireReady() {
     try { window.dispatchEvent(new CustomEvent('kbwg:layout-ready')); } catch (e) {}
     try { window.dispatchEvent(new CustomEvent('kbwg:content-rendered')); } catch (e) {}
-    try { if (window.Weglot && typeof Weglot.refresh === 'function') Weglot.refresh(); } catch (e) {}
   }
 
-  Promise.all([
-    inject(HEADER_URL, '#siteHeaderMount'),
-    inject(FOOTER_URL, '#siteFooterMount')
-  ]).then(fireReady);
+  async function run() {
+    await Promise.allSettled([
+      inject(HEADER_URL, '#siteHeaderMount'),
+      inject(FOOTER_URL, '#siteFooterMount')
+    ]);
+    fireReady();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
 })();

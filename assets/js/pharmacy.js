@@ -1,4 +1,5 @@
 
+function bust(u){ try{ u=String(u); var sep=u.indexOf('?')>=0?'&':'?'; return u+sep+'t='+Date.now(); }catch(e){ return u; } }
 /* Pharmacy page (v15) */
 (function(){
   const state = { q: '', store: 'all' };
@@ -59,7 +60,7 @@
     });
   }
   async function init(){
-    const res = await fetch('data/pharmacy.json?v=2026-02-02-v19', { cache: 'force-cache' });
+    const res = await fetch(bust('data/pharmacy.json?v=2026-02-02-v19'), { cache: 'no-store' });
     const data = await res.json();
     const lu = data.updated ? new Date(data.updated).toLocaleDateString('he-IL', {year:'numeric',month:'2-digit',day:'2-digit'}) : '';
     if($('#phUpdated') && lu) $('#phUpdated').textContent = `עודכן לאחרונה: ${lu}`;

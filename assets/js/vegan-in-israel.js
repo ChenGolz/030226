@@ -1,4 +1,5 @@
 /* Vegan in Israel page logic (page-only) */
+function bust(u){ try{ u=String(u); var sep=u.indexOf('?')>=0?'&':'?'; return u+sep+'t='+Date.now(); }catch(e){ return u; } }
 (() => {
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -372,7 +373,7 @@
 
   async function load() {
     try {
-      const res = await fetch(DATA_URL, { cache: 'force-cache' });
+      const res = await fetch(bust(DATA_URL), { cache: 'no-store' });
       if (!res.ok) throw new Error('Bad response');
       const json = await res.json();
       STATE.places = (json.places || []).map(p => ({

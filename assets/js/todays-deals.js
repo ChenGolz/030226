@@ -1,4 +1,4 @@
-// Build: 2026-02-02-v19
+// Build: 2026-02-03-v22fix1
 // Renders "Today's Top Deals" from data/products.json by selecting products where isDiscounted === true.
 // Enriches badge flags from data/intl-brands.json when available.
 // Matches the "Products" page UI badges (tags + meta pills) but does NOT show the price-range/tier UI.
@@ -322,7 +322,12 @@
 
     // Fallback: convention used across the site assets/img/products/<ASIN>.jpg
     var asin = safeText(offer && offer.asin);
-    if (asin) return resolveFromBase('assets/img/products/' + asin + '.jpg');
+	    if (asin) {
+	      var fallbackPath = 'assets/img/products/' + asin + '.jpg';
+	      return (typeof window.KBWG_RESOLVE === 'function')
+	        ? window.KBWG_RESOLVE(fallbackPath)
+	        : resolveFromBase(fallbackPath);
+	    }
 
     return '';
   }
@@ -508,15 +513,15 @@
     setLoading(true);
     showEmpty(false);
 
-    var productsPath = resolveFromBase('data/products.json?v=2026-02-02-v19');
-    var brandsPath = resolveFromBase('data/intl-brands.json?v=2026-02-02-v19');
+    var productsPath = resolveFromBase('data/products.json?v=2026-02-03-v22');
+    var brandsPath = resolveFromBase('data/intl-brands.json?v=2026-02-03-v22');
 
-    var productsReq = fetch(productsPath, { cache: 'force-cache' }).then(function (r) {
+    var productsReq = fetch(productsPath, { cache: 'no-store' }).then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
     });
 
-    var brandsReq = fetch(brandsPath, { cache: 'force-cache' }).then(function (r) {
+    var brandsReq = fetch(brandsPath, { cache: 'no-store' }).then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
     }).catch(function () {

@@ -4603,3 +4603,14 @@ input,button,select,textarea{ font-family: inherit; }
   body.menuOpen .siteHeader .nav,
   body.menuopen .siteHeader .nav{ z-index: 2147483010 !important; }
 }
+
+
+/* Nav labels: full vs short (helps keep desktop nav in one row) */
+.navLabelShort{ display:none; }
+@media (max-width: 1120px){
+  .navLabelFull{ display:none; }
+  .navLabelShort{ display:inline; }
+  /* In the mobile drawer, prefer the full labels for clarity */
+  .kbwgDrawerNav .navLabelFull{ display:inline; }
+  .kbwgDrawerNav .navLabelShort{ display:none; }
+}

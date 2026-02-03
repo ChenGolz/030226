@@ -1,4 +1,5 @@
 // Home page helpers (v14) — fast, minimal, non-salesy
+function bust(u){ try{ u=String(u); var sep=u.indexOf('?')>=0?'&':'?'; return u+sep+'t='+Date.now(); }catch(e){ return u; } }
 (function(){
   function qs(sel){ return document.querySelector(sel); }
   function esc(s){
@@ -214,7 +215,7 @@
     if (!dealsGrid && !productsGrid) return;
 
     var productsUrl = 'data/products.json?v=2026-02-02-v19';
-    fetch(productsUrl, { cache: 'force-cache' })
+    fetch(bust(productsUrl), { cache: 'no-store' })
       .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
       .then(function(data){
         var list = Array.isArray(data) ? data : (Array.isArray(data.products) ? data.products : []);

@@ -1,4 +1,5 @@
 (function () {
+function bust(u){ try{ u=String(u); var sep=u.indexOf('?')>=0?'&':'?'; return u+sep+'t='+Date.now(); }catch(e){ return u; } }
   // Prevent double-load
   if (window.__kbHiddenGemsListLoaded) return;
   window.__kbHiddenGemsListLoaded = true;
@@ -255,7 +256,7 @@
 
   async function load(){
     try{
-      const res = await fetch(DATA_URL, { cache: 'force-cache' });
+      const res = await fetch(bust(DATA_URL), { cache: 'no-store' });
       const json = await res.json();
       STATE.items = dedupe(Array.isArray(json) ? json : (json.places || []));
     }catch(e){

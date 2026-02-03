@@ -2,7 +2,7 @@
 
 (function () {
   // Build marker: use this to verify you loaded the latest JS
-  window.KBWG_BUILD = '2026-02-02-v19';
+  window.KBWG_BUILD = '2026-02-03-v24';
   try { console.info('[KBWG] build', window.KBWG_BUILD); } catch(e) {}
     
 function kbwgInjectFaqSchema(){
@@ -712,11 +712,46 @@ function fixEnglishNavLabels(){
 }
 
 
+
+function kbwgInjectStructuredData(){
+  try{
+    if (document.getElementById('kbwgStructuredData')) return;
+    var base = String(location.origin || '').replace(/\/$/, '');
+    // Prefer the custom domain when present (CNAME), but fall back to current origin.
+    // This stays safe on GitHub Pages too.
+    var url = base + '/';
+    var logo = base + '/assets/img/logo.png';
+
+    var org = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "לקנות ללא אכזריות",
+      "url": url,
+      "logo": logo
+    };
+
+    var site = {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "לקנות ללא אכזריות",
+      "url": url
+    };
+
+    var s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.id = 'kbwgStructuredData';
+    s.textContent = JSON.stringify([org, site]);
+    document.head.appendChild(s);
+  }catch(e){}
+}
+
+
 // Initial run
 try { setupMobileFilterCollapse(); } catch(e) {}
 window.addEventListener('DOMContentLoaded', () => {
   try { setupMobileFilterCollapse(); } catch(e) {}
   try { fixEnglishNavLabels(); } catch(e) {}
+  try { kbwgInjectStructuredData(); } catch(e) {}
   try {
     // Remove the old global notice banner (now shown inside the navy hero header).
     const legacy = document.getElementById('kbwgGlobalVeganNotice');
