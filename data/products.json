@@ -93,7 +93,8 @@
         "url": "https://www.amazon.com/dp/B0CVQT4SDR?ref=t_ac_view_request_product_image&campaignId=amzn1.campaign.AAEL70PFN8KI&linkCode=tr1&tag=nocrueltyil-20&linkId=amzn1.campaign.AAEL70PFN8KI_1769640084077",
         "asin": "B0CVQT4SDR",
         "currency": "USD",
-        "priceUSD": 26
+        "priceUSD": 26,
+        "freeShipOver": 49
       }
     ],
     "isKids": false,
@@ -158,11 +159,12 @@
         "url": "https://www.amazon.com/dp/B0CVQTD4P3?ref=t_ac_view_request_product_image&campaignId=amzn1.campaign.AAEL70PFN8KI&linkCode=tr1&tag=nocrueltyil-20&linkId=amzn1.campaign.AAEL70PFN8KI_1769640084077",
         "asin": "B0CVQTD4P3",
         "currency": "USD",
-        "priceUSD": 26,
+        "priceUSD": 18.2,
         "freeShipOver": 49
       }
     ],
     "isKids": false,
+    "isDiscounted": true,
     "image": "assets/img/products/B0CVQTD4P3.jpg"
   },
   {
@@ -222,11 +224,12 @@
         "url": "https://www.amazon.com/dp/B0CRX55WP8?ref=t_ac_view_request_product_image&campaignId=amzn1.campaign.AAEL70PFN8KI&linkCode=tr1&tag=nocrueltyil-20&linkId=amzn1.campaign.AAEL70PFN8KI_1769640084077",
         "asin": "B0CRX55WP8",
         "currency": "USD",
-        "priceUSD": 26,
+        "priceUSD": 18.2,
         "freeShipOver": 49
       }
     ],
     "isKids": false,
+    "isDiscounted": true,
     "image": "assets/img/products/B0CRX55WP8.jpg"
   },
   {
@@ -422,10 +425,12 @@
         "url": "https://www.amazon.com/dp/B09GX4CVBX?tag=nocrueltyil-20",
         "asin": "B09GX4CVBX",
         "currency": "USD",
-        "priceUSD": 11.89
+        "priceUSD": 11.89,
+        "freeShipOver": 49
       }
     ],
     "isKids": false,
+    "isDiscounted": true,
     "image": "assets/img/products/B09GX4CVBX.jpg"
   },
   {
@@ -2867,7 +2872,8 @@
         "url": "https://www.amazon.com/ATTITUDE-Natural-Protects-verified-Rosemary/dp/B0C15QW2Q1?tag=nocrueltyil-20",
         "asin": "B0C15QW2Q1",
         "currency": "USD",
-        "priceUSD": 11.29
+        "priceUSD": 11.29,
+        "freeShipOver": 49
       }
     ],
     "image": "assets/img/products/B0C15QW2Q1.jpg",
@@ -3195,7 +3201,8 @@
         "url": "https://www.amazon.com/dp/B01N02JQX8?ref=t_ac_view_request_product_image&campaignId=amzn1.campaign.2FM4O7PSPZ19W&linkCode=tr1&tag=nocrueltyil-20&linkId=amzn1.campaign.2FM4O7PSPZ19W_1769202814943",
         "asin": "B01N02JQX8",
         "currency": "USD",
-        "priceUSD": 24.99
+        "priceUSD": 24.99,
+        "freeShipOver": 49
       }
     ],
     "isKids": false,
@@ -4326,7 +4333,8 @@
         "url": "https://www.amazon.com/dp/B07CQCB2KH?ref=t_ac_view_request_product_image&campaignId=amzn1.campaign.2OSR0QJAB9732&linkCode=tr1&tag=nocrueltyil-20&linkId=amzn1.campaign.2OSR0QJAB9732_1769201392830",
         "asin": "B07CQCB2KH",
         "currency": "USD",
-        "priceUSD": 27.51
+        "priceUSD": 27.51,
+        "freeShipOver": 49
       }
     ],
     "isKids": false,
@@ -5279,7 +5287,8 @@
         "url": "https://www.amazon.com/dp/B00DKF7XPW?ref=t_ac_view_request_product_image&campaignId=amzn1.campaign.3FLP8OWIZ7EWJ&linkCode=tr1&tag=nocrueltyil-20&linkId=amzn1.campaign.3FLP8OWIZ7EWJ_1769106052470",
         "asin": "B00DKF7XPW",
         "currency": "USD",
-        "priceUSD": 27.99
+        "priceUSD": 27.99,
+        "freeShipOver": 49
       }
     ],
     "isKids": false,
@@ -5856,7 +5865,8 @@
         "url": "https://www.amazon.com/dp/B0CQKM7R21?tag=nocrueltyil-20",
         "asin": "B0CQKM7R21",
         "currency": "USD",
-        "priceUSD": 19.99
+        "priceUSD": 19.99,
+        "freeShipOver": 49
       }
     ],
     "isKids": false,
@@ -6814,7 +6824,8 @@
         "url": "https://www.amazon.com/dp/B084F3K4MJ?ref=t_ac_view_request_product_image&campaignId=amzn1.campaign.Z1J6KVQ71ZA4&linkCode=tr1&tag=nocrueltyil-20&linkId=amzn1.campaign.Z1J6KVQ71ZA4_1769178868545",
         "asin": "B084F3K4MJ",
         "currency": "USD",
-        "priceUSD": 12.0
+        "priceUSD": 12.0,
+        "freeShipOver": 49
       }
     ],
     "isKids": false,
@@ -7085,7 +7096,8 @@
         "url": "https://www.amazon.com/dp/B09BGGMQDD?ref=t_ac_view_request_product_image&campaignId=amzn1.campaign.HQADB0YJX2LP&linkCode=tr1&tag=nocrueltyil-20&linkId=amzn1.campaign.HQADB0YJX2LP_1769180001959",
         "asin": "B09BGGMQDD",
         "currency": "USD",
-        "priceUSD": 17.28
+        "priceUSD": 17.28,
+        "freeShipOver": 49
       }
     ],
     "isKids": false,

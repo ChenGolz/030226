@@ -133,4 +133,32 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://nocrueltyil.com/en/wall-of-kindness.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nocrueltyil.com/wall-of-kindness.html" />
   </url>
+  <url>
+    <loc>https://nocrueltyil.com/science.html</loc>
+    <lastmod>2026-02-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="he" href="https://nocrueltyil.com/science.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nocrueltyil.com/en/science.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nocrueltyil.com/science.html" />
+  </url>
+  <url>
+    <loc>https://nocrueltyil.com/nutrition.html</loc>
+    <lastmod>2026-02-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="he" href="https://nocrueltyil.com/nutrition.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nocrueltyil.com/en/nutrition.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nocrueltyil.com/nutrition.html" />
+  </url>
+  <url>
+    <loc>https://nocrueltyil.com/apps.html</loc>
+    <lastmod>2026-02-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="he" href="https://nocrueltyil.com/apps.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nocrueltyil.com/en/apps.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nocrueltyil.com/apps.html" />
+  </url>
+  <url>
+    <loc>https://nocrueltyil.com/israeli-recipes.html</loc>
+    <lastmod>2026-02-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="he" href="https://nocrueltyil.com/israeli-recipes.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nocrueltyil.com/en/israeli-recipes.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nocrueltyil.com/israeli-recipes.html" />
+  </url>
 </urlset>
