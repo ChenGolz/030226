@@ -1,5 +1,4 @@
-function bust(u){ try{ u=String(u); var sep=u.indexOf('?')>=0?'&':'?'; return u+sep+'t='+Date.now(); }catch(e){ return u; } }
-// Build: 2026-02-03-v24
+// Build: 2026-02-02-v19
 // Renders "Today's Top Deals" from data/products.json by selecting products where isDiscounted === true.
 // Enriches badge flags from data/intl-brands.json when available.
 // Matches the "Products" page UI badges (tags + meta pills) but does NOT show the price-range/tier UI.
@@ -509,109 +508,15 @@ function bust(u){ try{ u=String(u); var sep=u.indexOf('?')>=0?'&':'?'; return u+
     setLoading(true);
     showEmpty(false);
 
-    // Deals filters (optional UI)
-    var uiQ = document.getElementById('dealQ');
-    var uiCat = document.getElementById('dealCat');
-    var uiSort = document.getElementById('dealSort');
-    var uiOnlyLB = document.getElementById('dealOnlyLB');
-    var uiOnlyPeta = document.getElementById('dealOnlyPeta');
-    var uiOnlyFree = document.getElementById('dealOnlyFreeShip');
-    var uiCount = document.getElementById('dealCount');
-    var uiClear = document.getElementById('dealClear');
+    var productsPath = resolveFromBase('data/products.json?v=2026-02-02-v19');
+    var brandsPath = resolveFromBase('data/intl-brands.json?v=2026-02-02-v19');
 
-    // Deep-link search: todays-top-deals.html?q=...
-    (function syncQuery(){
-      try{
-        var params = new URLSearchParams(location.search || '');
-        var qq = (params.get('q') || '').trim();
-        if (qq && uiQ) uiQ.value = qq;
-      }catch(e){}
-    })();
-
-    function setDealCount(n){
-      if (!uiCount) return;
-      uiCount.textContent = (n||0) + ' דילים';
-    }
-
-    function getDealPrice(p){
-      var offer = pickBestOffer(p) || {};
-      var price = null;
-      if (typeof offer.priceUSD === 'number' && isFinite(offer.priceUSD)) price = offer.priceUSD;
-      else if (typeof offer.price === 'number' && isFinite(offer.price)) price = offer.price;
-      return (price == null) ? null : Number(price);
-    }
-
-    function applyDealFilters(){
-      if (!KB_DEALS_ALL) return;
-      var q = (uiQ && uiQ.value ? String(uiQ.value) : '').trim().toLowerCase();
-      var cat = uiCat ? String(uiCat.value||'') : '';
-      var sort = uiSort ? String(uiSort.value||'') : 'updated';
-
-      var out = KB_DEALS_ALL.slice();
-
-      if (uiOnlyLB && uiOnlyLB.checked) out = out.filter(function(p){ return !!(p && p.isLB); });
-      if (uiOnlyPeta && uiOnlyPeta.checked) out = out.filter(function(p){ return !!(p && p.isPeta); });
-      if (uiOnlyFree && uiOnlyFree.checked) out = out.filter(function(p){ return !!getOfferWithMinFreeShip(p); });
-
-      if (cat) out = out.filter(function(p){ return getCategoryLabelFromProduct(p) === cat; });
-
-      if (q){
-        out = out.filter(function(p){
-          var hay = (safeText(p.brand) + ' ' + safeText(p.name) + ' ' + (getCats(p)||[]).join(' ')).toLowerCase();
-          return hay.indexOf(q) !== -1;
-        });
-      }
-
-      // sorting
-      if (sort === 'price-low'){
-        out.sort(function(a,b){
-          var pa = getDealPrice(a); var pb = getDealPrice(b);
-          if (pa == null && pb == null) return 0;
-          if (pa == null) return 1;
-          if (pb == null) return -1;
-          return pa - pb;
-        });
-      } else if (sort === 'price-high'){
-        out.sort(function(a,b){
-          var pa = getDealPrice(a); var pb = getDealPrice(b);
-          if (pa == null && pb == null) return 0;
-          if (pa == null) return 1;
-          if (pb == null) return -1;
-          return pb - pa;
-        });
-      } else if (sort === 'brand-az'){
-        out.sort(function(a,b){
-          return safeText(a.brand).localeCompare(safeText(b.brand), 'he') || safeText(a.name).localeCompare(safeText(b.name), 'he');
-        });
-      } else if (sort === 'name-az'){
-        out.sort(function(a,b){
-          return safeText(a.name).localeCompare(safeText(b.name), 'he') || safeText(a.brand).localeCompare(safeText(b.brand), 'he');
-        });
-      } else {
-        // 'updated' default — try updated desc, fallback stable order by brand+name
-        out.sort(function(a,b){
-          var ta = Date.parse(String(a && a.updated || '')) || 0;
-          var tb = Date.parse(String(b && b.updated || '')) || 0;
-          if (tb !== ta) return tb - ta;
-          return safeText(a.brand).localeCompare(safeText(b.brand), 'he') || safeText(a.name).localeCompare(safeText(b.name), 'he');
-        });
-      }
-
-      KB_DEALS = out;
-      KB_PAGE = 1;
-      setDealCount(out.length);
-      renderDealsPage();
-    }
-
-    var productsPath = resolveFromBase('data/products.json?v=2026-02-03-v24');
-    var brandsPath = resolveFromBase('data/intl-brands.json?v=2026-02-03-v24');
-
-    var productsReq = fetch(bust(productsPath), { cache: 'no-store' }).then(function (r) {
+    var productsReq = fetch(productsPath, { cache: 'force-cache' }).then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
     });
 
-    var brandsReq = fetch(bust(brandsPath), { cache: 'no-store' }).then(function (r) {
+    var brandsReq = fetch(brandsPath, { cache: 'force-cache' }).then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
     }).catch(function () {
@@ -637,53 +542,8 @@ function bust(u){ try{ u=String(u); var sep=u.indexOf('?')>=0?'&':'?'; return u+
         // Keep the list stable (in JSON order), but cap size.
         deals = deals.slice(0, MAX_DEALS);
 
-        KB_DEALS_ALL = deals;
         KB_DEALS = deals;
         KB_PAGE = 1;
-
-        // Populate categories dropdown
-        (function populateDealCats(){
-          if (!uiCat) return;
-          var seen = {};
-          var cats = [];
-          for (var ii=0; ii<KB_DEALS_ALL.length; ii++){
-            var c = getCategoryLabelFromProduct(KB_DEALS_ALL[ii]);
-            if (!c) continue;
-            if (seen[c]) continue;
-            seen[c] = true;
-            cats.push(c);
-          }
-          cats.sort(function(a,b){ return String(a).localeCompare(String(b), 'he'); });
-          // clear existing (keep first option)
-          while (uiCat.options.length > 1) uiCat.remove(1);
-          for (var jj=0; jj<cats.length; jj++){
-            var opt = document.createElement('option');
-            opt.value = cats[jj];
-            opt.textContent = cats[jj];
-            uiCat.appendChild(opt);
-          }
-        })();
-
-        // Bind filters
-        (function bindDealFilters(){
-          if (!uiQ && !uiCat && !uiSort && !uiOnlyLB && !uiOnlyPeta && !uiOnlyFree) return;
-          var handler = function(){ applyDealFilters(); };
-          if (uiQ) uiQ.addEventListener('input', handler);
-          if (uiCat) uiCat.addEventListener('change', handler);
-          if (uiSort) uiSort.addEventListener('change', handler);
-          if (uiOnlyLB) uiOnlyLB.addEventListener('change', handler);
-          if (uiOnlyPeta) uiOnlyPeta.addEventListener('change', handler);
-          if (uiOnlyFree) uiOnlyFree.addEventListener('change', handler);
-          if (uiClear) uiClear.addEventListener('click', function(){
-            if (uiQ) uiQ.value='';
-            if (uiCat) uiCat.value='';
-            if (uiSort) uiSort.value='updated';
-            if (uiOnlyLB) uiOnlyLB.checked=false;
-            if (uiOnlyPeta) uiOnlyPeta.checked=false;
-            if (uiOnlyFree) uiOnlyFree.checked=false;
-            applyDealFilters();
-          });
-        })();
 
         function renderDealsPage() {
           KB_PER = kbPerPage('deals');
@@ -729,13 +589,7 @@ function bust(u){ try{ u=String(u); var sep=u.indexOf('?')>=0?'&':'?'; return u+
           return;
         }
 
-        // First render
-        if (typeof applyDealFilters === 'function' && (uiQ || uiCat || uiSort || uiOnlyLB || uiOnlyPeta || uiOnlyFree)) {
-          applyDealFilters();
-        } else {
-          setDealCount(KB_DEALS.length);
-          renderDealsPage();
-        }
+        renderDealsPage();
 })
       .catch(function (err) {
         console.warn('[todays-deals] Could not render deals', err);
