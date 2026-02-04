@@ -1,19 +1,24 @@
-// Build: 2026-02-02-v19
+// Build: 2026-02-04-v20
 // Shared layout injector (header + footer) for KBWG static pages
 // Loads partials/header.html into #siteHeaderMount and partials/footer.html into #siteFooterMount
 (function () {
 
-const KBWG_LAYOUT_BUILD = '2026-02-02-v19';
+const KBWG_LAYOUT_BUILD = '2026-02-04-v20';
 const KBWG_HEADER_KEY = 'kbwg_header_' + KBWG_LAYOUT_BUILD;
 const KBWG_FOOTER_KEY = 'kbwg_footer_' + KBWG_LAYOUT_BUILD;
 
-// Clear older cached versions so header updates immediately
+// Keep the menu/footer fresh (users were seeing old cached partials).
+// Remove any cached header/footer partials from older builds.
 try {
-  ['KBWG_HEADER_KEY','KBWG_HEADER_KEY','kbwg_header_v3','KBWG_FOOTER_KEY','KBWG_FOOTER_KEY','kbwg_footer_v3'].forEach(k=>sessionStorage.removeItem(k));
-} catch(e) {}
-
-
-  const scriptEl = document.currentScript;
+  const keys = Object.keys(sessionStorage || {});
+  keys.forEach(k => {
+    if (!k.startsWith('kbwg:partial:')) return;
+    const isLayoutPartial = (k.includes('partials/header.html') || k.includes('partials/footer.html'));
+    const isCurrentBuild = k.includes('v=' + KBWG_LAYOUT_BUILD);
+    if (isLayoutPartial && !isCurrentBuild) sessionStorage.removeItem(k);
+  });
+} catch (e) {}
+const scriptEl = document.currentScript;
   const base = (scriptEl && scriptEl.dataset && scriptEl.dataset.base) ? scriptEl.dataset.base : '';
   const HEADER_URL = base + 'partials/header.html?v=' + KBWG_LAYOUT_BUILD;
   const FOOTER_URL = base + 'partials/footer.html?v=' + KBWG_LAYOUT_BUILD;
@@ -21,30 +26,37 @@ try {
   function cacheKey(url){ return 'kbwg:partial:' + url; }
 
   async function inject(url, mountSelector) {
-    const mount = document.querySelector(mountSelector);
-    if (!mount) return false;
+  const mount = document.querySelector(mountSelector);
+  if (!mount) return false;
 
-    // Try session cache first (fast navigation between pages)
-    try {
-      const cached = sessionStorage.getItem(cacheKey(url));
-      if (cached) {
-        mount.innerHTML = cached;
-        return true;
-      }
-    } catch (e) {}
+  const key = cacheKey(url);
 
-    try {
-      const res = await fetch(url, { cache: 'force-cache' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const html = await res.text();
-      mount.innerHTML = html;
-      try { sessionStorage.setItem(cacheKey(url), html); } catch (e) {}
-      return true;
-    } catch (e) {
-      // Fail silently – page still works without injected layout
-      return false;
+  // 1) Paint from session cache immediately (fast navigation)
+  let paintedFromCache = false;
+  try {
+    const cached = sessionStorage.getItem(key);
+    if (cached) {
+      mount.innerHTML = cached;
+      paintedFromCache = true;
     }
+  } catch (e) {}
+
+  // 2) Always try to fetch the latest (avoid 'stuck' header/footer)
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const html = await res.text();
+
+    // Update only if different (prevents flicker)
+    if (!paintedFromCache || mount.innerHTML !== html) {
+      mount.innerHTML = html;
+    }
+    try { sessionStorage.setItem(key, html); } catch (e) {}
+    return true;
+  } catch (e) {
+    return paintedFromCache;
   }
+}
 
   function fireReady() {
     try { window.dispatchEvent(new CustomEvent('kbwg:layout-ready')); } catch (e) {}
