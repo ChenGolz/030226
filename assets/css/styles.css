@@ -63,7 +63,7 @@ h3{ font-size: 18px; margin:0 0 8px; }
   .siteHeader .nav{
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow: visible; /* keep dropdowns visible */
