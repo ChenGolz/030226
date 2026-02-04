@@ -5,7 +5,7 @@
       <span class="logoText">לקנות ללא אכזריות</span>
     </a>
 
-    <!-- Mobile actions -->
+    <!-- Mobile actions (your global JS/CSS handles the drawer) -->
     <div class="navMobileActions">
       <a class="quickSearch" href="products.html" aria-label="חיפוש מוצרים">
         <span aria-hidden="true">🔎</span>
@@ -16,69 +16,116 @@
       </button>
     </div>
 
-    <nav aria-label="ניווט ראשי" class="nav">
-      <!-- Mega menu hub -->
-      <details class="navMega navGroup">
+    <nav aria-label="ניווט ראשי" class="nav navTop">
+      <a class="navLink" href="index.html">בית</a>
+
+      <details class="navGroup">
         <summary>
-          <span class="navTopLabel">תפריט</span>
+          <span class="navTopLabel">מאגר</span>
           <span class="navChevron" aria-hidden="true">▾</span>
         </summary>
-
-        <div class="megaDrop" role="menu" aria-label="כל הקטגוריות">
-          <div class="megaGrid">
+        <div class="megaDrop" role="menu" aria-label="מאגר">
+          <div class="megaGrid twoCol">
             <div class="megaCol">
-              <div class="megaTitle">🛍️ מאגר</div>
-              <a href="products.html" role="menuitem">🔎 חיפוש מוצרים</a>
-              <a href="bundles.html" role="menuitem">🎁 מארזים</a>
-              <a href="israeli-brands.html" role="menuitem">🇮🇱 מותגים בישראל</a>
+              <div class="megaTitle">🛍️ מוצרים</div>
+              <a href="products.html" role="menuitem">🔎 חיפוש במאגר</a>
               <a href="recommended-brands.html" role="menuitem">🌍 מותגים מחו״ל</a>
             </div>
-
             <div class="megaCol">
-              <div class="megaTitle">🛠️ כלים</div>
-              <a href="ingredient-detective.html" role="menuitem">🧪 בודק רכיבים</a>
-              <a href="pharmacy.html" role="menuitem">🧴 בפארם</a>
-              <a href="amazon-info.html" role="menuitem">📦 קנייה באמזון</a>
-              <a href="apps.html" role="menuitem">📱 אפליקציות</a>
+              <div class="megaTitle">🎁 מארזים ומותגים</div>
+              <a href="bundles.html" role="menuitem">🎁 מארזים</a>
+              <a href="israeli-brands.html" role="menuitem">🇮🇱 מותגים בישראל</a>
             </div>
-
-            <div class="megaCol">
-              <div class="megaTitle">📚 מדריכים</div>
-              <a href="learn.html" role="menuitem">📘 מרכז למידה</a>
-              <a href="nutrition.html" role="menuitem">🥗 בריאות ותזונה</a>
-              <a href="science.html" role="menuitem">🧫 מה המדע אומר</a>
-              <a href="methodology.html" role="menuitem">🧠 איך אנחנו בודקים</a>
-            </div>
-
-            <div class="megaCol">
-              <div class="megaTitle">📍 ישראל</div>
-              <a href="vegan-in-israel.html" role="menuitem">🗺️ טבעוני בישראל</a>
-              <a href="hidden-gems-map.html" role="menuitem">✨ Hidden Gems</a>
-              <a href="israeli-recipes.html" role="menuitem">🍲 מתכונים ישראליים</a>
-              <a href="community.html" role="menuitem">💛 קהילה</a>
-            </div>
-          </div>
-
-          <div class="megaCTA">
-            <a class="megaBtn primary" href="todays-top-deals.html">🔥 דילים היום</a>
-            <a class="megaBtn" href="products.html">🛍️ חיפוש במאגר</a>
-            <a class="megaBtn ghost" href="contact.html">✉️ שליחת עדכון</a>
-          </div>
-
-          <div class="megaFine">
-            <a href="about.html">על האתר</a>
-            <span aria-hidden="true">•</span>
-            <a href="terms.html">תקנון</a>
           </div>
         </div>
       </details>
 
-      <!-- Primary action -->
       <a class="navPrimary" href="todays-top-deals.html" aria-label="דילים היום">🔥 דילים היום</a>
 
-      <!-- Quick actions (kept short so the bar stays calm) -->
-      <a class="navQuick" href="products.html" aria-label="חיפוש">🔎 <span class="navQuickText">חיפוש</span></a>
-      <a class="navQuick" href="ingredient-detective.html" aria-label="בודק רכיבים">🧪 <span class="navQuickText">רכיבים</span></a>
+      <details class="navGroup">
+        <summary>
+          <span class="navTopLabel">כלים</span>
+          <span class="navChevron" aria-hidden="true">▾</span>
+        </summary>
+        <div class="megaDrop" role="menu" aria-label="כלים">
+          <div class="megaGrid twoCol">
+            <div class="megaCol">
+              <div class="megaTitle">🧪 בדיקות</div>
+              <a href="ingredient-detective.html" role="menuitem">🧪 בודק רכיבים</a>
+              <a href="pharmacy.html" role="menuitem">🧴 בפארם</a>
+            </div>
+            <div class="megaCol">
+              <div class="megaTitle">🛒 קנייה חכמה</div>
+              <a href="amazon-info.html" role="menuitem">📦 קנייה באמזון</a>
+              <a href="apps.html" role="menuitem">📱 אפליקציות</a>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="navGroup">
+        <summary>
+          <span class="navTopLabel">מדריכים</span>
+          <span class="navChevron" aria-hidden="true">▾</span>
+        </summary>
+        <div class="megaDrop" role="menu" aria-label="מדריכים">
+          <div class="megaGrid twoCol">
+            <div class="megaCol">
+              <div class="megaTitle">📚 ידע</div>
+              <a href="learn.html" role="menuitem">📘 מרכז למידה</a>
+              <a href="nutrition.html" role="menuitem">🥗 בריאות ותזונה</a>
+            </div>
+            <div class="megaCol">
+              <div class="megaTitle">🧠 מדע ושיטה</div>
+              <a href="science.html" role="menuitem">🧫 מה המדע אומר</a>
+              <a href="methodology.html" role="menuitem">🧠 איך אנחנו בודקים</a>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="navGroup">
+        <summary>
+          <span class="navTopLabel">ישראל</span>
+          <span class="navChevron" aria-hidden="true">▾</span>
+        </summary>
+        <div class="megaDrop" role="menu" aria-label="ישראל">
+          <div class="megaGrid twoCol">
+            <div class="megaCol">
+              <div class="megaTitle">📍 לצאת החוצה</div>
+              <a href="vegan-in-israel.html" role="menuitem">🗺️ טבעוני בישראל</a>
+              <a href="hidden-gems-map.html" role="menuitem">✨ Hidden Gems</a>
+            </div>
+            <div class="megaCol">
+              <div class="megaTitle">🍲 אוכל</div>
+              <a href="israeli-recipes.html" role="menuitem">🍲 מתכונים ישראליים</a>
+              <a href="community.html" role="menuitem">💛 קהילה</a>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="navGroup">
+        <summary>
+          <span class="navTopLabel">אודות</span>
+          <span class="navChevron" aria-hidden="true">▾</span>
+        </summary>
+        <div class="megaDrop" role="menu" aria-label="אודות">
+          <div class="megaGrid twoCol">
+            <div class="megaCol">
+              <div class="megaTitle">ℹ️ האתר</div>
+              <a href="about.html" role="menuitem">ℹ️ על האתר</a>
+              <a href="contact.html" role="menuitem">✉️ צרו קשר</a>
+              <a href="wall-of-kindness.html" role="menuitem">💛 Wall of Kindness</a>
+            </div>
+            <div class="megaCol">
+              <div class="megaTitle">📄 משפטי</div>
+              <a href="terms.html" role="menuitem">📄 תקנון</a>
+              <a href="privacy.html" role="menuitem">🔒 פרטיות</a>
+            </div>
+          </div>
+        </div>
+      </details>
     </nav>
   </div>
 
@@ -117,30 +164,48 @@
       font-weight: 900;
     }
 
-    /* Top bar (calm) */
-    #siteHeader .nav{ overflow: visible; display: inline-flex; align-items: center; gap: 10px; }
-    #siteHeader details.navGroup{ position: relative; }
+    /* Top nav row */
+    #siteHeader .navTop{
+      overflow: visible;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
 
+    #siteHeader .navLink{
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 10px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 900;
+      color: var(--ink);
+      min-height: 44px;
+      white-space: nowrap;
+    }
+    #siteHeader .navLink:hover{ background: rgba(157,195,230,.18); }
+
+    #siteHeader details.navGroup{ position: relative; }
     #siteHeader details.navGroup > summary{
       list-style: none;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 10px 12px;
-      border-radius: 999px;
+      padding: 10px 10px;
+      border-radius: 12px;
       font-weight: 900;
       color: var(--ink);
       user-select: none;
-      border: 1px solid rgba(31,41,55,.10);
-      background: rgba(255,255,255,.72);
       min-height: 44px;
       white-space: nowrap;
     }
     #siteHeader details.navGroup > summary::-webkit-details-marker{ display:none; }
-    #siteHeader .navChevron{ opacity: .75; transform: translateY(1px); }
+    #siteHeader details.navGroup > summary:hover{ background: rgba(157,195,230,.18); }
+    #siteHeader .navChevron{ opacity: .7; transform: translateY(1px); }
 
-    /* Primary action */
+    /* Primary action: deals */
     #siteHeader .navPrimary{
       display: inline-flex;
       align-items: center;
@@ -148,41 +213,25 @@
       padding: 10px 14px;
       border-radius: 999px;
       text-decoration: none;
-      font-weight: 900;
+      font-weight: 1000;
       color: #fff;
       background: #e11d48;
       border: 1px solid rgba(0,0,0,.08);
-      box-shadow: 0 10px 24px rgba(225,29,72,.22);
+      box-shadow: 0 10px 24px rgba(225,29,72,.18);
       min-height: 44px;
       white-space: nowrap;
+      margin-inline: 6px;
     }
     #siteHeader .navPrimary:hover{ filter: brightness(1.03); }
 
-    /* Quick pills */
-    #siteHeader .navQuick{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 900;
-      color: var(--ink);
-      border: 1px solid rgba(31,41,55,.10);
-      background: rgba(157,195,230,.14);
-      min-height: 44px;
-      white-space: nowrap;
-    }
-    #siteHeader .navQuick:hover{ background: rgba(157,195,230,.22); }
-
-    /* Mega dropdown */
+    /* Dropdown panel (mega-style but per-section) */
     #siteHeader .megaDrop{
       position: absolute;
       top: calc(100% + 10px);
       right: 0;
-      width: min(980px, 92vw);
-      padding: 14px;
-      border-radius: 20px;
+      width: min(720px, 92vw);
+      padding: 12px;
+      border-radius: 18px;
       border: 1px solid rgba(31,41,55,.12);
       background: #fff;
       box-shadow: 0 22px 60px rgba(0,0,0,.14);
@@ -194,19 +243,32 @@
       transition: opacity .18s ease, transform .18s ease;
     }
 
-    #siteHeader .navMega[open] .megaDrop,
-    #siteHeader .navMega:hover .megaDrop,
-    #siteHeader .navMega:focus-within .megaDrop{
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
+    /* Open on hover/focus on desktop, click works everywhere */
+    @media (min-width: 821px){
+      #siteHeader details.navGroup:hover .megaDrop,
+      #siteHeader details.navGroup:focus-within .megaDrop,
+      #siteHeader details.navGroup[open] .megaDrop{
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+    }
+    @media (max-width: 820px){
+      #siteHeader details.navGroup[open] .megaDrop{
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
     }
 
     #siteHeader .megaGrid{
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
     }
+    #siteHeader .megaGrid.twoCol{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     #siteHeader .megaCol{
       border: 1px solid rgba(31,41,55,.10);
       border-radius: 16px;
@@ -232,59 +294,13 @@
     }
     #siteHeader .megaCol a:hover{ background: rgba(157,195,230,.22); }
 
-    #siteHeader .megaCTA{
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(31,41,55,.10);
-    }
-    #siteHeader .megaBtn{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 900;
-      color: var(--ink);
-      border: 1px solid rgba(31,41,55,.10);
-      background: rgba(157,195,230,.14);
-      min-height: 44px;
-      white-space: nowrap;
-    }
-    #siteHeader .megaBtn:hover{ background: rgba(157,195,230,.22); }
-    #siteHeader .megaBtn.primary{
-      color: #fff;
-      background: #e11d48;
-      border-color: rgba(0,0,0,.08);
-      box-shadow: 0 10px 24px rgba(225,29,72,.20);
-    }
-    #siteHeader .megaBtn.ghost{
-      background: transparent;
-    }
-
-    #siteHeader .megaFine{
-      margin-top: 10px;
-      font-size: .92rem;
-      color: rgba(15,23,42,.70);
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    #siteHeader .megaFine a{ color: rgba(15,23,42,.82); text-decoration: none; font-weight: 800; }
-    #siteHeader .megaFine a:hover{ text-decoration: underline; }
-
     /* Mobile */
     @media (max-width: 820px){
       #siteHeader .quickSearch{ display: inline-flex; }
-      #siteHeader .nav{ display: grid; gap: 8px; }
-      #siteHeader .navPrimary{ display: none; }
-      #siteHeader .navQuick{ width: 100%; justify-content: space-between; }
-      #siteHeader details.navGroup > summary{ width: 100%; justify-content: space-between; border-radius: 16px; padding: 14px 12px; }
+      #siteHeader .navTop{ display: grid; gap: 8px; width: 100%; }
+      #siteHeader .navPrimary{ width: 100%; justify-content: center; }
+      #siteHeader details.navGroup > summary,
+      #siteHeader .navLink{ width: 100%; justify-content: space-between; padding: 14px 12px; border-radius: 16px; }
       #siteHeader .megaDrop{
         position: static;
         width: auto;
@@ -294,16 +310,12 @@
         pointer-events: auto;
         transition: none;
         margin-top: 6px;
+        padding: 0;
+        border: 0;
+        background: transparent;
       }
-      #siteHeader .megaGrid{ grid-template-columns: 1fr; }
-      #siteHeader .megaCTA{ justify-content: space-between; }
-      #siteHeader .megaBtn{ width: 100%; justify-content: center; }
-      #siteHeader .navQuickText{ display: inline; }
-    }
-
-    /* Very small widths: keep top bar clean */
-    @media (max-width: 420px){
-      #siteHeader .navQuickText{ display: none; }
+      #siteHeader .megaCol{ background: rgba(157,195,230,.08); }
+      #siteHeader .megaGrid.twoCol{ grid-template-columns: 1fr; }
     }
   </style>
 
@@ -337,11 +349,13 @@
         header.querySelectorAll('details[open]').forEach(function(d){ d.removeAttribute('open'); });
       });
 
-      // Only one open at a time on click
+      // Only one open at a time on click (mobile / keyboard)
       header.querySelectorAll('details > summary').forEach(function(s){
         s.addEventListener('click', function(){
           var cur = s.parentElement;
-          header.querySelectorAll('details[open]').forEach(function(d){ if(d !== cur) d.removeAttribute('open'); });
+          header.querySelectorAll('details[open]').forEach(function(d){
+            if(d !== cur) d.removeAttribute('open');
+          });
         });
       });
     })();
