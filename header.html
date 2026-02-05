@@ -208,7 +208,15 @@
       color: var(--ink);
     }
     #siteHeader .navDrop a:hover{ background: rgba(157,195,230,.18); }
-    /* Mobile: keep dropdowns inside flow so they won't get clipped */
+    
+    /* Show only one label: desktop uses Full, mobile uses Short */
+    #siteHeader .navLabelShort{ display:none; }
+    @media (max-width: 820px){
+      #siteHeader .navLabelFull{ display:none; }
+      #siteHeader .navLabelShort{ display:inline; }
+    }
+
+/* Mobile: keep dropdowns inside flow so they won't get clipped */
     @media (max-width: 820px){
       #siteHeader .quickSearch{ display: inline-flex; }
       #siteHeader .navDrop{

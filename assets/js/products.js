@@ -1489,12 +1489,10 @@ const frag = document.createDocumentFragment();
     });
 
     grid.replaceChildren(frag);
-    // Refresh Weglot after dynamic content is rendered
-    if (window.Weglot && typeof window.Weglot.refresh === "function") {
-      window.Weglot.refresh();
-    }
+    // Notify (for translators like Weglot) after dynamic content renders.
+    try { window.dispatchEvent(new Event('kbwg:content-rendered')); } catch (e) {}
 
-    if (liveCount)     if (liveCount) {
+if (liveCount)     if (liveCount) {
       var rangeTxt = kbRangeText(page, total, perPage);
       liveCount.textContent = rangeTxt ? (rangeTxt) : String(total);
     }

@@ -40,7 +40,7 @@
       return base + '/' + p.replace(/^\//,'');
     } catch(e){ return rel; }
   }
-  function bust(u){ try{ u=String(u); var sep=u.indexOf('?')>=0?'&':'?'; return u+sep+'t='+Date.now(); }catch(e){ return u; } }
+  function bust(u){ return u; }catch(e){ return u; } }
   const DB_URL = bust(resolveFromBase('data/ingredient-db.json?v=' + encodeURIComponent(BUILD)));
 
 
@@ -101,7 +101,7 @@
 
   async function loadDb() {
     try {
-      const res = await fetch(DB_URL, { cache: 'no-store' });
+      const res = await fetch(DB_URL, { cache: 'force-cache' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
       const list = Array.isArray(json) ? json : (json.ingredients || []);
@@ -291,8 +291,17 @@
     }
   }
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    await loadDb();
-    initUI();
+  document.addEventListener('DOMContentLoaded', function(){
+    // Init UI first so the page feels instant on mobile.
+    try{ initUI(); }catch(e){}
+
+    // Load the DB after first paint (keeps the main thread free).
+    try{
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(function(){ loadDb(); }, { timeout: 1200 });
+      } else {
+        window.setTimeout(function(){ loadDb(); }, 60);
+      }
+    }catch(e){ try{ loadDb(); }catch(_){} }
   });
 })();
