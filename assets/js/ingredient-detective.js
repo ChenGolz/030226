@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  const BUILD = '2026-02-03-v24';
+  const BUILD = '2026-02-05-v25';
   console.log('[KBWG] Ingredient Detective build', BUILD);
 
   function siteBaseFromScript(){
@@ -40,8 +40,14 @@
       return base + '/' + p.replace(/^\//,'');
     } catch(e){ return rel; }
   }
-  function bust(u){ return u; }catch(e){ return u; } }
-  const DB_URL = bust(resolveFromBase('data/ingredient-db.json?v=' + encodeURIComponent(BUILD)));
+function addParam(u, k, v){
+  u = String(u || '');
+  if (!u) return u;
+  var sep = u.indexOf('?') >= 0 ? '&' : '?';
+  return u + sep + k + '=' + encodeURIComponent(v);
+}
+const DB_URL = addParam(resolveFromBase('data/ingredient-db.json'), 'v', BUILD);
+
 
 
   // ----- utils
@@ -291,17 +297,8 @@
     }
   }
 
-  document.addEventListener('DOMContentLoaded', function(){
-    // Init UI first so the page feels instant on mobile.
-    try{ initUI(); }catch(e){}
-
-    // Load the DB after first paint (keeps the main thread free).
-    try{
-      if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(function(){ loadDb(); }, { timeout: 1200 });
-      } else {
-        window.setTimeout(function(){ loadDb(); }, 60);
-      }
-    }catch(e){ try{ loadDb(); }catch(_){} }
+  document.addEventListener('DOMContentLoaded', async () => {
+    await loadDb();
+    initUI();
   });
 })();

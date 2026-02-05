@@ -41,28 +41,30 @@
 </section>
 </main>
 <div id="siteFooterMount"></div>
-<script defer="" src="assets/js/ingredient-detective.js?v=2026-02-03-v24"></script>
+<script defer="" src="assets/js/ingredient-detective.js?v=2026-02-05-v25"></script>
 <script data-base="./" defer="" src="assets/js/layout-inject.js?v=2026-02-03-v24"></script>
 <script defer="" src="assets/js/site.js?v=2026-02-03-v24"></script>
 <!-- Weglot helper: refresh translations after dynamic content renders -->
 <script>
 (function(){
-  var t = null;
   function wgRefresh(){
     try{
       if (window.Weglot && typeof Weglot.refresh === 'function') Weglot.refresh();
     }catch(e){}
   }
-  function schedule(){
-    if (t) clearTimeout(t);
-    t = setTimeout(wgRefresh, 140);
-  }
+  // initial
+  document.addEventListener('DOMContentLoaded', function(){ setTimeout(wgRefresh, 80); });
 
-  // initial + after dynamic content renders
-  document.addEventListener('DOMContentLoaded', function(){ schedule(); });
-  window.addEventListener('kbwg:content-rendered', function(){ schedule(); });
+  // optional: if your JS triggers this after rendering cards/lists
+  window.addEventListener('kbwg:content-rendered', function(){ setTimeout(wgRefresh, 80); });
 
-  // Avoid MutationObserver on heavy pages (mobile performance).
+  // watch for DOM changes (debounced)
+  var t=null;
+  var mo=new MutationObserver(function(){
+    clearTimeout(t);
+    t=setTimeout(wgRefresh, 250);
+  });
+  mo.observe(document.documentElement, { childList:true, subtree:true });
 })();
 </script>
 </body>
